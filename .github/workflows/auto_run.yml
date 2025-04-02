@@ -1,4 +1,4 @@
-name: Run main.py every 15 minutes
+name: Run main.py with Cloud SQL Proxy
 
 on:
   schedule:
@@ -13,6 +13,18 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v3
 
+    - name: Authenticate to Google Cloud
+      uses: google-github-actions/auth@v1
+      with:
+        credentials_json: '${{ secrets.GCP_CREDENTIALS }}'
+
+    - name: Start Cloud SQL Proxy
+      uses: google-github-actions/setup-cloud-sql-proxy@v1
+      with:
+        instance_connection_name: 'boreal-atom-450721-q8:europe-west1:dashboard-for-streaming-data'
+        credentials_json: '${{ secrets.GCP_CREDENTIALS }}'
+        port: 5432
+
     - name: Set up Python
       uses: actions/setup-python@v4
       with:
@@ -24,4 +36,7 @@ jobs:
         pip install -r requirements.txt
 
     - name: Run script
+      env:
+        API_KEY: ${{ secrets.API_KEY }}
+        DATABASE_URL: postgresql+psycopg2://youruser:yourpassword@127.0.0.1:5432/your_db_name
       run: python main.py
