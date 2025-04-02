@@ -74,8 +74,9 @@ def main():
         print({"error": "No internet connection"})
         return
 
-    DATABASE_URL = "postgresql+psycopg2://postgres:_7:I)Em.3UN-MxEK@35.241.173.29:5432/postgres"
-    API_KEY = "AIzaSyCS2r9Bak-1cdWDc7fCk683--Z587QNVXM"
+    API_KEY = os.getenv("API_KEY")
+    DATABASE_URL = os.getenv("DATABASE_URL")
+
 
     engine = create_engine(DATABASE_URL)
 
