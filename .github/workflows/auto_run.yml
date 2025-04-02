@@ -38,11 +38,6 @@ jobs:
     - name: Run script
       env:
         API_KEY: ${{ secrets.API_KEY }}
-        DATABASE_URL: postgresql+psycopg2://postgres:_7:I)Em.3UN-MxEK@127.0.0.1:5432/postgres
+        DATABASE_URL: ${{ secrets.DATABASE_URL }}
       run: python main.py
 
-    - name: Run script
-      env:
-        API_KEY: ${{ secrets.API_KEY }}
-        DATABASE_URL: postgresql+psycopg2://youruser:yourpassword@127.0.0.1:5432/your_db_name
-      run: python main.py
