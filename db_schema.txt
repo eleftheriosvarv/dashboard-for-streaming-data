@@ -1,0 +1,21 @@
+📦 Database: PostgreSQL (Google Cloud SQL)
+
+🧾 Table: routes_data
+
+Columns:
+
+- aqi                         : Air Quality Index at the time of data capture
+- timestamp                  : Date and time of the record
+- route_id                   : Unique identifier for the route
+- travel_time_difference     : Time difference between current and expected travel
+- id                         : Primary key (auto-increment)
+- start_latitude             : Latitude of the route’s starting point
+- start_longitude            : Longitude of the route’s starting point
+- end_latitude               : Latitude of the destination point
+- end_longitude              : Longitude of the destination point
+- driving_travel_time        : Travel time by car (seconds)
+- transit_travel_time        : Travel time by public transport (seconds)
+- free_flow_driving_travel_time : Ideal driving time under free-flow traffic
+- delay_ratio                : Ratio of actual delay vs ideal time
+- start_location             : Name/description of the starting point
+- end_location               : Name/description of the end point
