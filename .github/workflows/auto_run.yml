@@ -18,13 +18,13 @@ jobs:
       with:
         credentials_json: '${{ secrets.GCP_CREDENTIALS }}'
 
-    - name: Start Cloud SQL Proxy
-      uses: google-github-actions/setup-cloud-sql-proxy@v1
-      with:
-        instance_connection_name: 'boreal-atom-450721-q8:europe-west1:dashboard-for-streaming-data'
-        credentials_json: '${{ secrets.GCP_CREDENTIALS }}'
-        port: 5432
-
+    - name: Start Cloud SQL Proxy manually
+      run: |
+        echo "${{ secrets.GCP_CREDENTIALS }}" > key.json
+        curl -o cloud-sql-proxy https://dl.google.com/cloudsql/cloud_sql_proxy.linux.amd64
+        chmod +x cloud-sql-proxy
+        ./cloud-sql-proxy boreal-atom-450721-q8:europe-west1:dashboard-for-streaming-data --credentials-file=key.json &
+      
     - name: Set up Python
       uses: actions/setup-python@v4
       with:
@@ -40,4 +40,5 @@ jobs:
         API_KEY: ${{ secrets.API_KEY }}
         DATABASE_URL: ${{ secrets.DATABASE_URL }}
       run: python main.py
+
 
