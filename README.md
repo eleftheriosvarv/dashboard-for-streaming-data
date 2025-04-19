@@ -1,65 +1,57 @@
-# 📊 Dashboard for Streaming Data
+Streaming Data Processing for Dashboard
 
-This project runs a Python script (`main.py`) that:
+This project runs a Python script that processes transportation and environmental data and stores the results in a PostgreSQL database hosted on Google Cloud SQL. The script runs automatically every 15 minutes using GitHub Actions.
 
-- Reads data from `athens_routes.csv`
-- Processes the data
-- Stores it in a **PostgreSQL** database on **Google Cloud SQL**
+How It Works
 
-All of this runs **automatically every 15 minutes** using GitHub Actions.
+The script loads data from the CSV file athens_routes.csv
 
----
+It connects to the database using a secure Cloud SQL Proxy
 
-## 🚀 How it works
+A GitHub Actions workflow triggers the script every 15 minutes
 
-1. `main.py` loads data from the CSV file.
-2. It connects securely to Google Cloud SQL using a **Cloud SQL Proxy**.
-3. The script is triggered **every 15 minutes** (cron schedule) via GitHub Actions.
-4. GitHub Secrets are used to protect credentials.
+GitHub Secrets are used to manage credentials securely
 
----
+Technologies Used
 
-## 🔐 GitHub Secrets
+Python 3.10
 
-| Secret Name       | Description                          |
-|-------------------|--------------------------------------|
-| `API_KEY`         | External API key (if needed)         |
-| `DATABASE_URL`    | Connection string to PostgreSQL      |
-| `GCP_CREDENTIALS` | JSON key from Google Cloud service account |
+PostgreSQL on Google Cloud SQL
 
----
+Cloud SQL Proxy
 
-## ⚙️ Technologies Used
+GitHub Actions
 
-- Python 3.10
-- GitHub Actions (CI)
-- Google Cloud SQL (PostgreSQL)
-- Cloud SQL Proxy
-- GitHub Secrets
+GitHub Secrets
 
----
+GitHub Secrets Required
 
-## 🛡️ Security Features
+API_KEY: external API key (optional, for any APIs used)
 
-- No credentials exposed in code
-- `.gitignore` protects local/secret files
-- Public access (`0.0.0.0/0`) removed from Cloud SQL
-- Secure IAM-based access only via service account
+DATABASE_URL: connection string to the PostgreSQL database
 
----
+GCP_CREDENTIALS: JSON key for Google Cloud service account
 
-## 📁 Project Files
+Security Features
 
-| File                     | Description                          |
-|--------------------------|--------------------------------------|
-| `main.py`                | Python script that processes and saves data |
-| `athens_routes.csv`      | CSV file with route data             |
-| `requirements.txt`       | Python dependencies                  |
-| `.github/workflows/...`  | GitHub Actions workflow              |
+No credentials are exposed in code
 
----
+.gitignore is configured to protect sensitive files
 
-## ✍️ Author
+Cloud SQL access is restricted to IAM-based service account authentication
 
-Built by [@eleftheriosvarv](https://github.com/eleftheriosvarv)  
-*Runs while you sleep 😴*
+Public IP access is disabled
+
+Main Files
+
+main.py: the data processing and insertion script
+
+athens_routes.csv: input data file with route information
+
+requirements.txt: Python dependencies
+
+.github/workflows/: contains GitHub Actions workflow configuration
+
+Author
+
+Developed by Eleftherios Varv
